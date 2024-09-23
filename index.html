@@ -28,21 +28,22 @@
         }
         .coupon-header img {
             margin-left: 10px;
-            width: 80px;
-            height: auto;
+            width: 80px; /* Adjust this width as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .coupon-code-container {
+            text-align: center;
+            margin-bottom: 20px;
         }
         .coupon-code {
             display: inline-block;
-            padding: 0px;
+            padding: 10px;
             background-color: #f0f0f0;
             border: 1px dashed #ddd;
             font-size: 16px;
-            margin-bottom: 20px;
-        }
-        .coupon-code span {
+            margin-bottom: 10px;
             background-color: green;
             color: white;
-            padding: 5px 10px;
         }
         .copy-btn {
             background-color: #4CAF50;
@@ -51,10 +52,11 @@
             border: none;
             cursor: pointer;
             font-size: 14px;
+            margin-top: 10px;
         }
         .store-info {
             margin-top: 20px;
-            color:red;
+            color: red;
             font-size: 14px;
         }
         .go-store {
@@ -84,8 +86,8 @@
     <div class="coupon-header">
         <img src="/izil.png" alt="Site Logo">كود خصم ايزل فعال 100%  IZIL Beauty كوبون ذهبي ومختصر لجميع الدول بلا استنثاء !!</div>
     
-    <div class="coupon-code">
-        <span>AA791</span>
+    <div class="coupon-code-container">
+        <div class="coupon-code">AA791</div>
         <button class="copy-btn" onclick="copyCode()">نسخ</button>
     </div>
 
