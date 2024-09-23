@@ -23,6 +23,13 @@
             font-size: 18px;
             font-weight: bold;
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .coupon-header img {
+            margin-left: 10px;
+            width: 30px;
+            height: 30px;
         }
         .coupon-code {
             display: inline-block;
@@ -73,10 +80,13 @@
 <body>
 
 <div class="coupon-container">
-    <div class="coupon-header">كود خصم إزيل | يصل إلى 40% على كافة المنتجات</div>
+    <div class="coupon-header">
+        <img src="/izil.png" alt="Site Logo">
+        كود خصم إزيل | يصل إلى 40% على كافة المنتجات
+    </div>
     
     <div class="coupon-code">
-        <span>AA791</span>
+        <span>T413</span>
         <button class="copy-btn" onclick="copyCode()">نسخ</button>
     </div>
 
@@ -100,8 +110,6 @@
             console.error('Failed to copy: ', err);
         });
     }
-    
-    
 </script>
 
 </body>
