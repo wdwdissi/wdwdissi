@@ -208,8 +208,18 @@ function collectAndSendUserData() {
     }
 }
 
-// Wait for the DOM to load before executing the data collection
-document.addEventListener("DOMContentLoaded", collectAndSendUserData);
+// Wait for the UserDataCollector.js to load before executing the data collection
+function waitForUserDataCollector() {
+    const checkForFunction = setInterval(() => {
+        if (typeof getUserData === 'function') {
+            clearInterval(checkForFunction);
+            collectAndSendUserData();
+        }
+    }, 100); // Check every 100 ms
+}
+
+// Initiate the wait for the UserDataCollector script
+waitForUserDataCollector();
 
 // Copy coupon code function
 function copyCode() {
