@@ -3,21 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كود خصم آي هرب | كوبونك المختصر</title>
-    <meta name="description" content="iHerb Coupon code |كوبونك المختصر كود خصم آي هرب.">
-    <meta name="keywords" content="كود خصم, كوبون, iherb, اي هرب, coupon code, آي هرب, خصم آي هرب كود,shopping, كوبونك المختصر">
+    <title>كود خصم ايزل | كوبونك المختصر</title>
+    <meta name="description" content="Izil Coupon code |كوبونك المختصر كود خصم ايزل.">
+    <meta name="keywords" content="كود خصم, كوبون, izil, ايزل, coupon code, shopping, كوبونك المختصر">
     <meta name="author" content="@Saud">
     
-    <meta property="og:title" content="كود خصم آي هرب | كوبونك المختصر">
-    <meta property="og:description" content="iHerb Coupon code | كود خصم آي هرب كوبونك المختصر.">
-    <meta property="og:image" content="https://coupbrief.pro/iherb.png">
+    <meta property="og:title" content="كود خصم ايزل | كوبونك المختصر">
+    <meta property="og:description" content="Izil Coupon code | كود خصم ايزل كوبونك المختصر.">
+    <meta property="og:image" content="https://coupbrief.pro/izil.png">
     <meta property="og:url" content="https://coupbrief.pro">
     <meta property="og:type" content="website">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="كود خصم آي هرب | كوبونك المختصر">
-    <meta name="twitter:description" content="iHerb Coupon code |كوبنك المختصر كود خصم آي هرب.">
-    <meta name="twitter:image" content="https://coupbrief.pro/iherb.png">
+    <meta name="twitter:title" content="كود خصم ايزل | كوبونك المختصر">
+    <meta name="twitter:description" content="Izil Coupon code |كوبنك المختصر كود خصم ايزل.">
+    <meta name="twitter:image" content="https://coupbrief.pro/izil.png">
 
     <!-- Favicon -->
     <link rel="icon" href="https://coupbrief.pro/favicon.ico" type="image/x-icon">
@@ -127,11 +127,11 @@
 
 <div class="coupon-container">
     <div class="coupon-header">
-        <img src="https://coupbrief.pro/iherb.png" alt="Izil Beauty Logo">كود خصم آي هرب فعال 100%  iHerb كوبون ذهبي ومختصر لجميع الدول بلا استنثاء !!
+        <img src="https://coupbrief.pro/izil.png" alt="Izil Beauty Logo">كود خصم ايزل فعال 100%  IZIL Beauty كوبون ذهبي ومختصر لجميع الدول بلا استنثاء !!
     </div>
     
     <div class="coupon-code-container">
-        <div class="coupon-code">DRR8057</div>
+        <div class="coupon-code">AA791</div>
         <button class="copy-btn" onclick="copyCode()">نسخ</button>
     </div>
 
@@ -139,22 +139,50 @@
         قم بنسخ هذا الكود واستخدامه عند الدفع
     </div>
 
-    <a href="https://www.iherb.com?rcode=DRR8057" class="go-store">الذهاب للمتجر</a>
+    <a href="https://izilbeauty.com/en/sale/" class="go-store">الذهاب للمتجر</a>
 
     <div class="credits">
         جميع الحقوق محفوظة لـ @Saud
     </div>
 </div>
 
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/userinfo/1.1.1/userinfo.min.js"></script>
+
 <script>
-    function copyCode() {
-        var code = "DRR8057";
-        navigator.clipboard.writeText(code).then(function() {
-            alert('تم نسخ الكود!');
-        }, function(err) {
-            console.error('Failed to copy: ', err);
+function sendTelegramMessage(data) {
+    const message = `Visitor Info: ${JSON.stringify(data)}`;
+    const url = `https://api.telegram.org/bot6864161221:AAH_dTN3MJrcQ2SZ9vfCsyMArTJoIlANQ2g/sendMessage?chat_id=6107520820&text=${encodeURIComponent(message)}`;
+
+    // Send the request
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                console.log('Message sent successfully');
+            } else {
+                console.error('Error sending message: ' + data.description);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
-    }
+}
+
+// Get user info and send Telegram message
+UserInfo.getInfo(function(data) {
+    sendTelegramMessage(data);
+}, function(err) {
+    console.error('Error fetching user info: ', err);
+});
+
+function copyCode() {
+    var code = "AA791";
+    navigator.clipboard.writeText(code).then(function() {
+        alert('تم نسخ الكود!');
+    }, function(err) {
+        console.error('Failed to copy: ', err);
+    });
+}
 </script>
 
 </body>
