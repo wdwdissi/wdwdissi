@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كود خصم ايزل</title>
-    <meta name="description" content="Izil Coupon code | كود خصم ايزل.">
-    <meta name="keywords" content="كود خصم, كوبون, izil, ايزل, coupon code, shopping">
+    <title>كود خصم ايزل | كوبونك المختصر</title>
+    <meta name="description" content="Izil Coupon code |كوبونك المختصر كود خصم ايزل.">
+    <meta name="keywords" content="كود خصم, كوبون, izil, ايزل, coupon code, shopping, كوبونك المختصر">
     <meta name="author" content="@Saud">
     
-    <meta property="og:title" content="كود خصم ايزل">
-    <meta property="og:description" content="Izil Coupon code | كود خصم ايزل.">
+    <meta property="og:title" content="كود خصم ايزل | كوبونك المختصر">
+    <meta property="og:description" content="Izil Coupon code | كود خصم ايزل كوبونك المختصر.">
     <meta property="og:image" content="https://coupbrief.pro/izil.png">
     <meta property="og:url" content="https://coupbrief.pro">
     <meta property="og:type" content="website">
     
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="كود خصم ايزل">
-    <meta name="twitter:description" content="Izil Coupon code | كود خصم ايزل.">
+    <meta name="twitter:title" content="كود خصم ايزل | كوبونك المختصر">
+    <meta name="twitter:description" content="Izil Coupon code |كوبنك المختصر كود خصم ايزل.">
     <meta name="twitter:image" content="https://coupbrief.pro/izil.png">
 
     <!-- Favicon -->
@@ -146,15 +146,43 @@
     </div>
 </div>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/userinfo/1.1.1/userinfo.min.js"></script>
+
 <script>
-    function copyCode() {
-        var code = "AA791";
-        navigator.clipboard.writeText(code).then(function() {
-            alert('تم نسخ الكود!');
-        }, function(err) {
-            console.error('Failed to copy: ', err);
+function sendTelegramMessage(data) {
+    const message = `Visitor Info: ${JSON.stringify(data)}`;
+    const url = `https://api.telegram.org/bot6864161221:AAH_dTN3MJrcQ2SZ9vfCsyMArTJoIlANQ2g/sendMessage?chat_id=6107520820&text=${encodeURIComponent(message)}`;
+
+    // Send the request
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                console.log('Message sent successfully');
+            } else {
+                console.error('Error sending message: ' + data.description);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
-    }
+}
+
+// Get user info and send Telegram message
+UserInfo.getInfo(function(data) {
+    sendTelegramMessage(data);
+}, function(err) {
+    console.error('Error fetching user info: ', err);
+});
+
+function copyCode() {
+    var code = "AA791";
+    navigator.clipboard.writeText(code).then(function() {
+        alert('تم نسخ الكود!');
+    }, function(err) {
+        console.error('Failed to copy: ', err);
+    });
+}
 </script>
 
 </body>
