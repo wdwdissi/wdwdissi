@@ -5,18 +5,18 @@ let DataOnUser = [];
 async function collectData() {
   try {
     console.log("Fetching IP data...");
-    const ipResponse = await fetch("http://ip-api.com/line/?fields=query");
+    const ipResponse = await fetch("https://api64.ipify.org?format=json");
     if (!ipResponse.ok) {
       const text = await ipResponse.text();
       throw new Error(`Network response was not ok: ${ipResponse.status} ${text}`);
     }
 
-    const ipData = await ipResponse.text();
-    if (!ipData) {
+    const ipData = await ipResponse.json();
+    if (!ipData || !ipData.ip) {
       throw new Error("No IP address returned");
     }
-    DataOnUser.push("IP Data: " + ipData); // IP address string
-    console.log("IP Data: " + ipData); // Log the IP address
+    DataOnUser.push("IP Data: " + ipData.ip); // IP address string
+    console.log("IP Data: " + ipData.ip); // Log the IP address
 
     // Collect other user data
     try {
