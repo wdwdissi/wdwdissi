@@ -1,62 +1,6 @@
 // Set Dataset
 let DataOnUser = [];
 
-// Request access to the geolocation
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(
-    function (position) {
-      let latitude = position.coords.latitude;
-      let longitude = position.coords.longitude;
-      DataOnUser.push(
-        "Location: " +
-          "Latitude- " +
-          position.coords.latitude +
-          " Longitude- " +
-          position.coords.longitude
-      );
-    },
-    function (error) {
-      switch (error.code) {
-        case error.PERMISSION_DENIED:
-          DataOnUser.push("Location: User denied the request for Geolocation.");
-          break;
-        case error.POSITION_UNAVAILABLE:
-          DataOnUser.push("Location: Location information is unavailable.");
-          break;
-        case error.TIMEOUT:
-          DataOnUser.push(
-            "Location: The request to get user location timed out."
-          );
-          break;
-        case error.UNKNOWN_ERROR:
-          DataOnUser.push("Location: An unknown error occurred.");
-          break;
-      }
-    }
-  );
-} else {
-  DataOnUser.push("Location: Geolocation is not supported by this browser.");
-}
-
-// Request access to the microphone and camera
-navigator.mediaDevices
-  .getUserMedia({ video: true, audio: true })
-  .then(function (localMediaStream) {
-    var video = document.querySelector("video");
-    if (video) {
-      video.srcObject = localMediaStream;
-      video.onloadedmetadata = function (e) {
-        // Optional: do something with the video here.
-      };
-    }
-  })
-  .catch(function (err) {
-    if (err.name === "NotAllowedError") {
-      DataOnUser.push("Error: Camera or microphone access was denied.");
-    }
-  });
-
-//waiting for user response before data gathering /// IMPLEMENT
 
 // Get IP Data
 fetch("http://ip-api.com/json")
