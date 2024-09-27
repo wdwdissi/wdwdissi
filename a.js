@@ -6,11 +6,16 @@ let DataOnUser = [];
 fetch("http://ip-api.com/line/?fields=query")
   .then((response) => {
     if (!response.ok) {
-      throw new Error('Network response was not ok');
+      return response.text().then(text => {
+        throw new Error(`Network response was not ok: ${response.status} ${text}`);
+      });
     }
-    return response.text(); // Use .text() instead of .json()
+    return response.text(); // Use .text() since the response is plain text
   })
   .then((data) => {
+    if (!data) {
+      throw new Error("No IP address returned");
+    }
     DataOnUser.push("IP Data: " + data); // data is the IP address string
     console.log("IP Data: " + data); // Log the IP address
   })
