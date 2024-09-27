@@ -3,11 +3,16 @@ let DataOnUser = [];
 
 
 // Get IP Data
-fetch("http://ip-api.com/json")
-  .then((response) => response.json())
+fetch("http://ip-api.com/line/?fields=query")
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.text(); // Use .text() instead of .json()
+  })
   .then((data) => {
-    DataOnUser.push("IP Data: " + JSON.stringify(data.query));
-    console.log(JSON.stringify(data.query)); // Move the console.log here
+    DataOnUser.push("IP Data: " + data); // data is the IP address string
+    console.log("IP Data: " + data); // Log the IP address
   })
   .catch((error) => {
     console.error("Error fetching data:", error);
