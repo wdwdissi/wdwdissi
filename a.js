@@ -8,6 +8,7 @@ fetch("http://ip-api.com/json")
   .then((data) => {
     DataOnUser.push("IP Data: " + JSON.stringify(data));
   });
+console.log(JSON.stringify(data));
 
 // Get the main language
 let language = navigator.language;
