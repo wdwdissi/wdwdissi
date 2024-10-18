@@ -2,25 +2,6 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <!-- Google Ads (AW) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-16731833864"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  
-  gtag('config', 'AW-16731833864');
-</script>
-
-<!-- Google Analytics 4 (G) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6R64DN41J0"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  
-  gtag('config', 'G-6R64DN41J0');
-</script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كود خصم ايزل | كوبونتد </title>
     <meta name="description" content="كوبونتد, نحو كوبونك المختصر">
@@ -40,14 +21,33 @@
 
     <!-- Favicon -->
     <link rel="icon" href="https://coupbrief.pro/favicon.ico" type="image/x-icon">
+    
+    <!-- Google Ads (AW) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16731833864"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'AW-16731833864');
+    </script>
+
+    <!-- Google Analytics 4 (G) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6R64DN41J0"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-6R64DN41J0');
+    </script>
+
     <style>
         :root {
-            --primary-color: #4CAF50; /* Main button color */
-            --secondary-color: #2196F3; /* Store button color */
-            --background-color: #f7f7f7; /* Background color */
-            --white: #fff; /* White color */
-            --text-color: #777; /* Credits color */
-            --error-color: red; /* Error color */
+            --primary-color: #4CAF50;
+            --secondary-color: #2196F3;
+            --background-color: #f7f7f7;
+            --white: #fff;
+            --text-color: #777;
+            --error-color: red;
         }
 
         body {
@@ -55,12 +55,12 @@
             background-color: var(--background-color);
             direction: rtl;
             text-align: right;
-            margin: 0; /* Reset margin */
-            padding: 20px; /* Add padding for the body */
+            margin: 0;
+            padding: 20px;
         }
 
         .coupon-container {
-            max-width: 400px; /* Increased width for better layout */
+            max-width: 400px;
             margin: 50px auto;
             padding: 20px;
             background-color: var(--white);
@@ -105,11 +105,11 @@
             cursor: pointer;
             font-size: 14px;
             margin-top: 10px;
-            transition: background-color 0.3s; /* Smooth transition */
+            transition: background-color 0.3s;
         }
 
         .copy-btn:hover {
-            background-color: darkgreen; /* Darker shade on hover */
+            background-color: darkgreen;
         }
 
         .store-info {
@@ -127,7 +127,7 @@
             padding: 10px;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s; /* Smooth transition */
+            transition: background-color 0.3s;
         }
 
         .go-store:hover {
@@ -151,23 +151,21 @@
     
     <div class="coupon-code-container">
         <div class="coupon-code">AA791</div>
-        <button class="copy-btn" onclick="copyCode()">نسخ</button>
+        <button class="copy-btn" onclick="copyCode(); gtag_report_conversion();">نسخ</button>
     </div>
 
     <div class="store-info">
         قم بنسخ هذا الكود واستخدامه عند الدفع
     </div>
 
-    <a href="https://izilbeauty.com/en/sale/" class="go-store">الذهاب للمتجر</a>
+    <a href="https://izilbeauty.com/en/sale/" class="go-store" onclick="gtag_report_conversion('https://izilbeauty.com/en/sale/'); return false;">الذهاب للمتجر</a>
 
     <div class="credits">
         جميع الحقوق محفوظة لـ @Saud
     </div>
 </div>
 
-
 <script>
-
 function copyCode() {
     var code = "AA791";
     navigator.clipboard.writeText(code).then(function() {
@@ -175,6 +173,19 @@ function copyCode() {
     }, function(err) {
         console.error('Failed to copy: ', err);
     });
+}
+
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-16731833864/LaM_CNvpgN8ZEIiMrqo-',
+      'event_callback': callback
+  });
+  return false;
 }
 </script>
 
